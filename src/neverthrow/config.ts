@@ -4,7 +4,9 @@ import { handler } from './plugin';
 import type { MyPlugin } from './types';
 
 export const defaultConfig: MyPlugin['Config'] = {
-  config: {},
+  config: {
+    exportFromIndex: true,
+  },
   dependencies: ['@hey-api/typescript'],
   handler,
   name: 'neverthrow',

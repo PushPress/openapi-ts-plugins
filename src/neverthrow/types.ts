@@ -5,6 +5,8 @@ export type UserConfig = {
    * Plugin name. Must be unique.
    */
   name: 'neverthrow';
+
+  exportFromIndex: true;
   /**
    * Name of the generated file.
    *
