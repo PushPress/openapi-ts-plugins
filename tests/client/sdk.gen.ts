@@ -22,23 +22,8 @@ import type {
   GetUserPostsErrors,
   CreatePostData,
   CreatePostResponses,
+  CreatePostErrors,
 } from './types.gen';
-import {
-  zListUsersData,
-  zListUsersResponse,
-  zCreateUserData,
-  zCreateUserResponse,
-  zDeleteUserData,
-  zDeleteUserResponse,
-  zGetUserByIdData,
-  zGetUserByIdResponse,
-  zUpdateUserData,
-  zUpdateUserResponse,
-  zGetUserPostsData,
-  zGetUserPostsResponse,
-  zCreatePostData,
-  zCreatePostResponse,
-} from './zod.gen';
 import { client as _heyApiClient } from './client.gen';
 
 export type Options<
@@ -70,13 +55,7 @@ export const listUsers = <ThrowOnError extends boolean = true>(
     ListUsersErrors,
     ThrowOnError
   >({
-    requestValidator: async (data) => {
-      return await zListUsersData.parseAsync(data);
-    },
     responseType: 'json',
-    responseValidator: async (data) => {
-      return await zListUsersResponse.parseAsync(data);
-    },
     security: [
       {
         scheme: 'bearer',
@@ -104,13 +83,7 @@ export const createUser = <ThrowOnError extends boolean = true>(
     CreateUserErrors,
     ThrowOnError
   >({
-    requestValidator: async (data) => {
-      return await zCreateUserData.parseAsync(data);
-    },
     responseType: 'json',
-    responseValidator: async (data) => {
-      return await zCreateUserResponse.parseAsync(data);
-    },
     security: [
       {
         scheme: 'bearer',
@@ -142,12 +115,6 @@ export const deleteUser = <ThrowOnError extends boolean = true>(
     DeleteUserErrors,
     ThrowOnError
   >({
-    requestValidator: async (data) => {
-      return await zDeleteUserData.parseAsync(data);
-    },
-    responseValidator: async (data) => {
-      return await zDeleteUserResponse.parseAsync(data);
-    },
     security: [
       {
         scheme: 'bearer',
@@ -175,13 +142,7 @@ export const getUserById = <ThrowOnError extends boolean = true>(
     GetUserByIdErrors,
     ThrowOnError
   >({
-    requestValidator: async (data) => {
-      return await zGetUserByIdData.parseAsync(data);
-    },
     responseType: 'json',
-    responseValidator: async (data) => {
-      return await zGetUserByIdResponse.parseAsync(data);
-    },
     security: [
       {
         scheme: 'bearer',
@@ -209,13 +170,7 @@ export const updateUser = <ThrowOnError extends boolean = true>(
     UpdateUserErrors,
     ThrowOnError
   >({
-    requestValidator: async (data) => {
-      return await zUpdateUserData.parseAsync(data);
-    },
     responseType: 'json',
-    responseValidator: async (data) => {
-      return await zUpdateUserResponse.parseAsync(data);
-    },
     security: [
       {
         scheme: 'bearer',
@@ -247,13 +202,7 @@ export const getUserPosts = <ThrowOnError extends boolean = true>(
     GetUserPostsErrors,
     ThrowOnError
   >({
-    requestValidator: async (data) => {
-      return await zGetUserPostsData.parseAsync(data);
-    },
     responseType: 'json',
-    responseValidator: async (data) => {
-      return await zGetUserPostsResponse.parseAsync(data);
-    },
     security: [
       {
         scheme: 'bearer',
@@ -278,16 +227,10 @@ export const createPost = <ThrowOnError extends boolean = true>(
 ) => {
   return (options.client ?? _heyApiClient).post<
     CreatePostResponses,
-    unknown,
+    CreatePostErrors,
     ThrowOnError
   >({
-    requestValidator: async (data) => {
-      return await zCreatePostData.parseAsync(data);
-    },
     responseType: 'json',
-    responseValidator: async (data) => {
-      return await zCreatePostResponse.parseAsync(data);
-    },
     security: [
       {
         scheme: 'bearer',

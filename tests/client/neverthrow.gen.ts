@@ -10,6 +10,8 @@ import {
   getUserPosts,
   createPost,
 } from './sdk.gen';
+import { handleAxiosError } from './errors.gen';
+import type { AxiosError } from 'axios';
 import { ResultAsync } from 'neverthrow';
 import type {
   ListUsersData,
@@ -25,53 +27,47 @@ import type {
   GetUserPostsData,
   GetUserPostsErrors,
   CreatePostData,
+  CreatePostErrors,
 } from './types.gen';
 
 export const listUsersSafe = (options: Options<ListUsersData, true>) => {
-  return ResultAsync.fromPromise(
-    listUsers(options),
-    (error) => error as ListUsersErrors,
+  return ResultAsync.fromPromise(listUsers(options), (error) =>
+    handleAxiosError<ListUsersErrors>(error as AxiosError),
   );
 };
 
 export const createUserSafe = (options: Options<CreateUserData, true>) => {
-  return ResultAsync.fromPromise(
-    createUser(options),
-    (error) => error as CreateUserErrors,
+  return ResultAsync.fromPromise(createUser(options), (error) =>
+    handleAxiosError<CreateUserErrors>(error as AxiosError),
   );
 };
 
 export const deleteUserSafe = (options: Options<DeleteUserData, true>) => {
-  return ResultAsync.fromPromise(
-    deleteUser(options),
-    (error) => error as DeleteUserErrors,
+  return ResultAsync.fromPromise(deleteUser(options), (error) =>
+    handleAxiosError<DeleteUserErrors>(error as AxiosError),
   );
 };
 
 export const getUserByIdSafe = (options: Options<GetUserByIdData, true>) => {
-  return ResultAsync.fromPromise(
-    getUserById(options),
-    (error) => error as GetUserByIdErrors,
+  return ResultAsync.fromPromise(getUserById(options), (error) =>
+    handleAxiosError<GetUserByIdErrors>(error as AxiosError),
   );
 };
 
 export const updateUserSafe = (options: Options<UpdateUserData, true>) => {
-  return ResultAsync.fromPromise(
-    updateUser(options),
-    (error) => error as UpdateUserErrors,
+  return ResultAsync.fromPromise(updateUser(options), (error) =>
+    handleAxiosError<UpdateUserErrors>(error as AxiosError),
   );
 };
 
 export const getUserPostsSafe = (options: Options<GetUserPostsData, true>) => {
-  return ResultAsync.fromPromise(
-    getUserPosts(options),
-    (error) => error as GetUserPostsErrors,
+  return ResultAsync.fromPromise(getUserPosts(options), (error) =>
+    handleAxiosError<GetUserPostsErrors>(error as AxiosError),
   );
 };
 
 export const createPostSafe = (options: Options<CreatePostData, true>) => {
-  return ResultAsync.fromPromise(
-    createPost(options),
-    (error) => error as unknown,
+  return ResultAsync.fromPromise(createPost(options), (error) =>
+    handleAxiosError<CreatePostErrors>(error as AxiosError),
   );
 };
