@@ -1,2 +1,2 @@
-export { defaultConfig, defineConfig } from './config';
-export type { MyPlugin } from './types';
+// Plugin exports
+export * as neverthrow from './neverthrow';

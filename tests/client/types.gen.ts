@@ -461,6 +461,23 @@ export type CreatePostData = {
   url: '/posts';
 };
 
+export type CreatePostErrors = {
+  /**
+   * Bad request
+   */
+  400: BadRequestError;
+  /**
+   * Author not found
+   */
+  404: NotFoundError;
+  /**
+   * Internal server error
+   */
+  500: InternalServerError;
+};
+
+export type CreatePostError = CreatePostErrors[keyof CreatePostErrors];
+
 export type CreatePostResponses = {
   /**
    * Post created successfully
