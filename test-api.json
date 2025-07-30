@@ -532,7 +532,14 @@
       },
       "Post": {
         "type": "object",
-        "required": ["id", "title", "content", "authorId", "published", "createdAt"],
+        "required": [
+          "id",
+          "title",
+          "content",
+          "authorId",
+          "published",
+          "createdAt"
+        ],
         "properties": {
           "id": {
             "type": "string",

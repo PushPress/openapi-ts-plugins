@@ -1,16 +1,16 @@
-import { definePluginConfig } from '@hey-api/openapi-ts';
+import { definePluginConfig } from "@hey-api/openapi-ts";
 
-import { handler } from './plugin';
-import type { MyPlugin } from './types';
+import { handler } from "./plugin";
+import type { MyPlugin } from "./types";
 
-export const defaultConfig: MyPlugin['Config'] = {
+export const defaultConfig: MyPlugin["Config"] = {
   config: {
     exportFromIndex: true,
   },
-  dependencies: ['@hey-api/typescript'],
+  dependencies: ["@hey-api/typescript"],
   handler,
-  name: 'neverthrow',
-  output: 'neverthrow',
+  name: "neverthrow",
+  output: "neverthrow",
 };
 
 /**

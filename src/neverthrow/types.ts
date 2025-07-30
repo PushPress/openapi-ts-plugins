@@ -1,10 +1,10 @@
-import type { DefinePlugin } from '@hey-api/openapi-ts';
+import type { DefinePlugin } from "@hey-api/openapi-ts";
 
 export type UserConfig = {
   /**
    * Plugin name. Must be unique.
    */
-  name: 'neverthrow';
+  name: "neverthrow";
 
   exportFromIndex: true;
   /**
