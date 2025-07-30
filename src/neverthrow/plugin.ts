@@ -1,8 +1,8 @@
-import { createErrorHandler } from './errors';
-import type { MyPlugin } from './types';
-import { createNeverthrowWrapper } from './wrapper';
+import { createErrorHandler } from "./errors";
+import type { MyPlugin } from "./types";
+import { createNeverthrowWrapper } from "./wrapper";
 
-export const handler: MyPlugin['Handler'] = ({ plugin }) => {
+export const handler: MyPlugin["Handler"] = ({ plugin }) => {
   const file = plugin.createFile({
     id: plugin.name,
     path: plugin.output,
@@ -11,7 +11,7 @@ export const handler: MyPlugin['Handler'] = ({ plugin }) => {
   // create errors.gen.ts
   createErrorHandler(plugin);
 
-  plugin.forEach('operation', (event) => {
+  plugin.forEach("operation", (event) => {
     file.add(
       createNeverthrowWrapper({
         operation: event.operation,

@@ -1,14 +1,14 @@
-import type { MyPlugin } from './types';
-import { IR } from '@hey-api/openapi-ts';
-import { compiler as tsc } from '@hey-api/openapi-ts';
-import { ERROR_UTILITIES_ID, HANDLE_AXIOS_ERROR } from './errors';
+import type { MyPlugin } from "./types";
+import { IR } from "@hey-api/openapi-ts";
+import { compiler as tsc } from "@hey-api/openapi-ts";
+import { ERROR_UTILITIES_ID, HANDLE_AXIOS_ERROR } from "./errors";
 
 export const createNeverthrowWrapper = ({
   operation,
   plugin,
 }: {
   operation: IR.OperationObject;
-  plugin: MyPlugin['Instance'];
+  plugin: MyPlugin["Instance"];
 }) => {
   const file = plugin.context.file({ id: plugin.name })!;
   // Add error utilities file and import from it
@@ -20,7 +20,7 @@ export const createNeverthrowWrapper = ({
   const sdkImport = file.import({
     module: file.relativePathToFile({
       context: plugin.context,
-      id: 'sdk',
+      id: "sdk",
     }),
     name: sdkFunctionName,
   });
@@ -35,44 +35,44 @@ export const createNeverthrowWrapper = ({
 
   file.import({
     asType: true,
-    module: 'axios',
-    name: 'AxiosError',
+    module: "axios",
+    name: "AxiosError",
   });
 
   const resultImport = file.import({
-    module: 'neverthrow',
-    name: 'ResultAsync',
+    module: "neverthrow",
+    name: "ResultAsync",
   });
 
   // Get TypeScript types for function signature
-  const pluginTypeScript = plugin.getPlugin('@hey-api/typescript')!;
-  const fileTypeScript = plugin.context.file({ id: 'types' })!;
+  const pluginTypeScript = plugin.getPlugin("@hey-api/typescript")!;
+  const fileTypeScript = plugin.context.file({ id: "types" })!;
 
   // Get the data type for parameters
   const dataTypeName = fileTypeScript.getName(
-    pluginTypeScript.api.getId({ operation, type: 'data' }),
+    pluginTypeScript.api.getId({ operation, type: "data" }),
   );
   const errorTypeName = fileTypeScript.getName(
-    pluginTypeScript.api.getId({ operation, type: 'errors' }),
+    pluginTypeScript.api.getId({ operation, type: "errors" }),
   );
 
   file.import({
     asType: true,
-    module: file.relativePathToFile({ context: plugin.context, id: 'types' }),
+    module: file.relativePathToFile({ context: plugin.context, id: "types" }),
     name: dataTypeName,
   });
 
   file.import({
     asType: true,
-    module: file.relativePathToFile({ context: plugin.context, id: 'types' }),
+    module: file.relativePathToFile({ context: plugin.context, id: "types" }),
     name: fileTypeScript.getName(
-      pluginTypeScript.api.getId({ operation, type: 'errors' }),
+      pluginTypeScript.api.getId({ operation, type: "errors" }),
     ),
   });
 
   const optionsType = tsc.typeReferenceNode({
-    typeName: 'Options',
-    typeArguments: [tsc.typeNode(dataTypeName), tsc.typeNode('true')], // Will override throwOnError value
+    typeName: "Options",
+    typeArguments: [tsc.typeNode(dataTypeName), tsc.typeNode("true")], // Will override throwOnError value
   });
 
   // Generate function name
@@ -82,34 +82,34 @@ export const createNeverthrowWrapper = ({
     asType: true,
     module: file.relativePathToFile({
       context: plugin.context,
-      id: 'sdk',
+      id: "sdk",
     }),
-    name: 'Options',
+    name: "Options",
   });
 
   // Create the function body
   const functionBody = tsc.returnStatement({
     expression: tsc.callExpression({
       functionName: tsc.propertyAccessExpression({
-        expression: resultImport.name || 'ResultAsync',
-        name: 'fromPromise',
+        expression: resultImport.name || "ResultAsync",
+        name: "fromPromise",
       }),
       parameters: [
         tsc.callExpression({
           functionName: sdkImport.name || sdkFunctionName,
-          parameters: [tsc.identifier({ text: 'options' })],
+          parameters: [tsc.identifier({ text: "options" })],
         }),
         tsc.arrowFunction({
-          parameters: [{ name: 'error' }],
+          parameters: [{ name: "error" }],
           statements: tsc.callExpression({
-            functionName: 'handleAxiosError',
+            functionName: "handleAxiosError",
             parameters: [
               tsc.asExpression({
-                expression: tsc.identifier({ text: 'error' }),
-                type: tsc.typeNode('AxiosError'),
+                expression: tsc.identifier({ text: "error" }),
+                type: tsc.typeNode("AxiosError"),
               }),
             ],
-            types: [tsc.typeNode(errorTypeName ?? 'unknown')],
+            types: [tsc.typeNode(errorTypeName ?? "unknown")],
           }),
         }),
       ],
@@ -122,7 +122,7 @@ export const createNeverthrowWrapper = ({
     expression: tsc.arrowFunction({
       parameters: [
         {
-          name: 'options',
+          name: "options",
           type: optionsType,
         },
       ],

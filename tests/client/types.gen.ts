@@ -20,7 +20,7 @@ export type User = {
   /**
    * Current status of the user
    */
-  status: 'active' | 'inactive' | 'pending';
+  status: "active" | "inactive" | "pending";
   /**
    * Additional user metadata
    */
@@ -70,7 +70,7 @@ export type UpdateUserRequest = {
   /**
    * Current status of the user
    */
-  status?: 'active' | 'inactive' | 'pending';
+  status?: "active" | "inactive" | "pending";
   /**
    * Additional user metadata
    */
@@ -257,9 +257,9 @@ export type ListUsersData = {
     /**
      * Filter users by status
      */
-    status?: 'active' | 'inactive' | 'pending';
+    status?: "active" | "inactive" | "pending";
   };
-  url: '/users';
+  url: "/users";
 };
 
 export type ListUsersErrors = {
@@ -298,7 +298,7 @@ export type CreateUserData = {
   body: CreateUserRequest;
   path?: never;
   query?: never;
-  url: '/users';
+  url: "/users";
 };
 
 export type CreateUserErrors = {
@@ -332,7 +332,7 @@ export type DeleteUserData = {
     userId: string;
   };
   query?: never;
-  url: '/users/{userId}';
+  url: "/users/{userId}";
 };
 
 export type DeleteUserErrors = {
@@ -362,7 +362,7 @@ export type GetUserByIdData = {
     userId: string;
   };
   query?: never;
-  url: '/users/{userId}';
+  url: "/users/{userId}";
 };
 
 export type GetUserByIdErrors = {
@@ -393,7 +393,7 @@ export type UpdateUserData = {
     userId: string;
   };
   query?: never;
-  url: '/users/{userId}';
+  url: "/users/{userId}";
 };
 
 export type UpdateUserErrors = {
@@ -432,7 +432,7 @@ export type GetUserPostsData = {
      */
     published?: boolean;
   };
-  url: '/users/{userId}/posts';
+  url: "/users/{userId}/posts";
 };
 
 export type GetUserPostsErrors = {
@@ -458,7 +458,7 @@ export type CreatePostData = {
   body: CreatePostRequest;
   path?: never;
   query?: never;
-  url: '/posts';
+  url: "/posts";
 };
 
 export type CreatePostErrors = {
@@ -489,7 +489,7 @@ export type CreatePostResponse = CreatePostResponses[keyof CreatePostResponses];
 
 export type ClientOptions = {
   baseURL:
-    | 'https://api.testservice.com/v1'
-    | 'https://staging-api.testservice.com/v1'
+    | "https://api.testservice.com/v1"
+    | "https://staging-api.testservice.com/v1"
     | (string & {});
 };

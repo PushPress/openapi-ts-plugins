@@ -1,17 +1,17 @@
-import { MyPlugin } from './types';
+import { MyPlugin } from "./types";
 
-export const ERROR_UTILITIES_ID = 'errors';
+export const ERROR_UTILITIES_ID = "errors";
 
-export const HANDLE_AXIOS_ERROR = 'handleAxiosError';
+export const HANDLE_AXIOS_ERROR = "handleAxiosError";
 
 /**
  * Adds error utilities generated output
  * @param plugin - k
  */
-export const createErrorHandler = (plugin: MyPlugin['Instance']) => {
+export const createErrorHandler = (plugin: MyPlugin["Instance"]) => {
   const file = plugin.createFile({
     id: ERROR_UTILITIES_ID,
-    path: 'errors',
+    path: "errors",
   });
 
   const content = `import { AxiosError } from 'axios';

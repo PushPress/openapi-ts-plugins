@@ -33,18 +33,18 @@ This plugin works best with
 - throwOnError enabled so the result type is properly typed
 
 ```javascript
-import { defineConfig, defaultPlugins } from '@hey-api/openapi-ts';
-import { defineConfig as neverthrowPlugin } from '@pushpress/openapi-ts-plugins/neverthrow';
+import { defineConfig, defaultPlugins } from "@hey-api/openapi-ts";
+import { defineConfig as neverthrowPlugin } from "@pushpress/openapi-ts-plugins/neverthrow";
 
 export default defineConfig({
-  input: 'path/to/your/openapi.json',
+  input: "path/to/your/openapi.json",
   output: {
-    path: 'src/client',
+    path: "src/client",
   },
   plugins: [
     ...defaultPlugins,
-    { name: '@hey-api/sdk', validator: false },
-    { name: '@hey-api/client-axios', throwOnError: true },
+    { name: "@hey-api/sdk", validator: false },
+    { name: "@hey-api/client-axios", throwOnError: true },
     neverthrowPlugin(),
   ],
 });
@@ -139,4 +139,3 @@ src/
 - **Peer**: `neverthrow` (^8.2.0)
 - **Build**: `@rslib/core`, `@hey-api/openapi-ts`
 - **Testing**: `vitest`, `msw`
-

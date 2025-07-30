@@ -9,10 +9,10 @@ import {
   updateUser,
   getUserPosts,
   createPost,
-} from './sdk.gen';
-import { handleAxiosError } from './errors.gen';
-import type { AxiosError } from 'axios';
-import { ResultAsync } from 'neverthrow';
+} from "./sdk.gen";
+import { handleAxiosError } from "./errors.gen";
+import type { AxiosError } from "axios";
+import { ResultAsync } from "neverthrow";
 import type {
   ListUsersData,
   ListUsersErrors,
@@ -28,7 +28,7 @@ import type {
   GetUserPostsErrors,
   CreatePostData,
   CreatePostErrors,
-} from './types.gen';
+} from "./types.gen";
 
 export const listUsersSafe = (options: Options<ListUsersData, true>) => {
   return ResultAsync.fromPromise(listUsers(options), (error) =>
