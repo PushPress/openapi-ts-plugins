@@ -1,9 +1,10 @@
 import { createErrorHandler } from "./errors";
 import type { MyPlugin } from "./types";
-import { createNeverthrowWrapper } from "./wrapper";
+import { createNeverthrow } from "./wrapper";
 
 export const handler: MyPlugin["Handler"] = ({ plugin }) => {
-  const file = plugin.createFile({
+  // create neverthrow.gen.ts
+  plugin.createFile({
     id: plugin.name,
     path: plugin.output,
   });
@@ -12,11 +13,9 @@ export const handler: MyPlugin["Handler"] = ({ plugin }) => {
   createErrorHandler(plugin);
 
   plugin.forEach("operation", (event) => {
-    file.add(
-      createNeverthrowWrapper({
-        operation: event.operation,
-        plugin,
-      }),
-    );
+    createNeverthrow({
+      operation: event.operation,
+      plugin,
+    });
   });
 };
