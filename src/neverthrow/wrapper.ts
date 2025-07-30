@@ -3,7 +3,7 @@ import { IR } from "@hey-api/openapi-ts";
 import { compiler as tsc } from "@hey-api/openapi-ts";
 import { ERROR_UTILITIES_ID, HANDLE_AXIOS_ERROR } from "./errors";
 
-export const createNeverthrowWrapper = ({
+export const createNeverthrow = ({
   operation,
   plugin,
 }: {
@@ -132,5 +132,5 @@ export const createNeverthrowWrapper = ({
     name: functionName,
   });
 
-  return statement;
+  file.add(statement);
 };
