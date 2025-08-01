@@ -1,27 +1,12 @@
 {
   "name": "@pushpress/openapi-ts-plugins",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
-  "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "default": "./dist/index.js"
-    },
-    "./neverthrow": {
-      "types": "./dist/neverthrow/index.d.ts",
-      "import": "./dist/neverthrow/index.js",
-      "require": "./dist/neverthrow/index.cjs",
-      "default": "./dist/neverthrow/index.js"
-    }
-  },
+  "main": "./dist/index.js",
   "files": [
-    "dist/index.js",
-    "dist/index.d.ts",
-    "dist/neverthrow"
+    "dist",
+    "src"
   ],
   "scripts": {
     "build": "rslib build",
