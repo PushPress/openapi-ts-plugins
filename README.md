@@ -34,7 +34,7 @@ This plugin works best with
 
 ```javascript
 import { defineConfig, defaultPlugins } from "@hey-api/openapi-ts";
-import { defineConfig as neverthrowPlugin } from "@pushpress/openapi-ts-plugins/neverthrow";
+import { neverthrow } from "@pushpress/openapi-ts-plugins";
 
 export default defineConfig({
   input: "path/to/your/openapi.json",
@@ -45,7 +45,7 @@ export default defineConfig({
     ...defaultPlugins,
     { name: "@hey-api/sdk", validator: false },
     { name: "@hey-api/client-axios", throwOnError: true },
-    neverthrowPlugin(),
+    neverthrow.defineConfig(), // provide options here options
   ],
 });
 ```
