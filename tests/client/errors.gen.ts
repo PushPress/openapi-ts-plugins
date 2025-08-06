@@ -7,7 +7,7 @@ export type ErrorTaggedUnion<T extends Record<string, unknown>> = {
     error: T[K];
     status: K;
   };
-};
+}[keyof T];
 
 export const handleAxiosError = <T extends Record<string, unknown>>(
   error: AxiosError,
