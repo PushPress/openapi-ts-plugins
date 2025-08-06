@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { listUsersSafe } from "./client/neverthrow.gen";
 import { server } from "./mocks/server";
 import { http, HttpResponse } from "msw";
+import { a } from "vitest/dist/chunks/suite.d.FvehnV49.js";
 
 describe("API Tests with MSW", () => {
   it("should fetch users successfully", async () => {
@@ -44,10 +45,19 @@ describe("API Tests with MSW", () => {
       throw new Error("expected result to be an error");
     }
     const error = result.error;
-    if (error.status !== 500) {
-      throw new Error("expected error status to be 500");
-    }
 
-    expect(error.error.message).toEqual("internal server error");
+    switch (error.status) {
+      case 500:
+        expect(error.error.message).toEqual("internal server error");
+        return;
+      case 400:
+        throw new Error("expected error status to be 500");
+      default:
+        assertNever(error);
+    }
   });
 });
+
+function assertNever(n: never) {
+  return n;
+}
