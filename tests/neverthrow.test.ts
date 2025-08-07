@@ -2,7 +2,6 @@ import { describe, it, expect } from "vitest";
 import { listUsersSafe } from "./client/neverthrow.gen";
 import { server } from "./mocks/server";
 import { http, HttpResponse } from "msw";
-import { a } from "vitest/dist/chunks/suite.d.FvehnV49.js";
 
 describe("API Tests with MSW", () => {
   it("should fetch users successfully", async () => {
