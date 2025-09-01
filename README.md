@@ -20,6 +20,14 @@ The neverthrow plugin wraps generated API client functions with [neverthrow](htt
 pnpm install @pushpress/openapi-ts-plugins
 ```
 
+### For Neverthrow Plugin
+
+If you're using the neverthrow plugin, you also need to install neverthrow:
+
+```bash
+pnpm install neverthrow
+```
+
 ## Usage
 
 ### Basic Setup
@@ -136,6 +144,6 @@ src/
 ## Dependencies
 
 - **Runtime**: `axios`, `zod`
-- **Peer**: `neverthrow` (^8.2.0)
+- **Required for neverthrow plugin**: `neverthrow` (^8.2.0)
 - **Build**: `@rslib/core`, `@hey-api/openapi-ts`
 - **Testing**: `vitest`, `msw`
