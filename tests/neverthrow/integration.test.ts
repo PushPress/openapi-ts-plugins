@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { listUsersSafe } from "./client/neverthrow.gen";
-import { server } from "./mocks/server";
+import { listUsersSafe } from "../client/neverthrow.gen";
+import { server } from "../mocks/server";
 import { http, HttpResponse } from "msw";
 
 describe("API Tests with MSW", () => {
