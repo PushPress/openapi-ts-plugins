@@ -3,3 +3,4 @@ export * from "./types.gen";
 export * from "./sdk.gen";
 export * from "./neverthrow.gen";
 export * from "./errors.gen";
+export * from "./tools.gen";
