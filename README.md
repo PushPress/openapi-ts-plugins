@@ -14,6 +14,18 @@ The neverthrow plugin wraps generated API client functions with [neverthrow](htt
 - Creates typed error unions based on OpenAPI error responses
 - Maintains full type safety with generated TypeScript types
 
+### AI Tools Plugin
+
+The AI tools plugin generates structured tool definitions from OpenAPI operations, making it easy to integrate your API with AI systems that support tool calling (like OpenAI's function calling). Each OpenAPI operation is transformed into a tool object with proper schema validation.
+
+**Features:**
+
+- Generates tool definitions for each OpenAPI operation
+- Uses Zod schemas for parameter validation
+- Compatible with OpenAI function calling format
+- Maintains type safety with generated TypeScript types
+- Includes operation descriptions and summaries as tool documentation
+
 ## Installation
 
 ```bash
@@ -26,6 +38,14 @@ If you're using the neverthrow plugin, you also need to install neverthrow:
 
 ```bash
 pnpm install neverthrow
+```
+
+### For AI Tools Plugin
+
+If you're using the ai-tools plugin, you also need to install the OpenAI agents package:
+
+```bash
+pnpm install @openai/agents
 ```
 
 ## Usage
@@ -42,7 +62,7 @@ This plugin works best with
 
 ```javascript
 import { defineConfig, defaultPlugins } from "@hey-api/openapi-ts";
-import { neverthrow } from "@pushpress/openapi-ts-plugins";
+import { neverthrow, tools } from "@pushpress/openapi-ts-plugins";
 
 export default defineConfig({
   input: "path/to/your/openapi.json",
@@ -53,7 +73,8 @@ export default defineConfig({
     ...defaultPlugins,
     { name: "@hey-api/sdk", validator: false },
     { name: "@hey-api/client-axios", throwOnError: true },
-    neverthrow.defineConfig(), // provide options here options
+    neverthrow.defineConfig(), // neverthrow plugin
+    tools.defineConfig(), // ai-tools plugin
   ],
 });
 ```
@@ -83,6 +104,28 @@ if (result.isOk()) {
   // result.error is properly typed based on OpenAPI spec
   console.error(result.error);
 }
+```
+
+### AI Tools Example
+
+With the AI tools plugin, your OpenAPI operations are transformed into structured tool definitions:
+
+```typescript
+// Generated from your OpenAPI spec
+import { getUserTool, createUserTool } from "./client/tools";
+
+import { Agent, webSearchTool, fileSearchTool } from "@openai/agents";
+
+// Each tool contains:
+// - name: operation ID
+// - description: from OpenAPI operation
+// - parameters: Zod schema for validation
+// - exec: the actual API function
+
+const agent = new Agent({
+  name: "Travel assistant",
+  tools: [tool(getUserTool), tool(createUserTool)],
+});
 ```
 
 ## Development
@@ -127,23 +170,8 @@ Generate the test client from the OpenAPI spec:
 pnpm gen
 ```
 
-## Project Structure
-
-```
-src/
-├── index.ts              # Main plugin exports
-└── neverthrow/           # Neverthrow plugin implementation
-    ├── config.ts         # Plugin configuration
-    ├── errors.ts         # Error handling utilities
-    ├── index.ts          # Plugin exports
-    ├── plugin.ts         # Core plugin logic
-    ├── types.ts          # TypeScript type definitions
-    └── wrapper.ts        # Function wrapper generation
-```
-
 ## Dependencies
 
 - **Runtime**: `axios`, `zod`
 - **Required for neverthrow plugin**: `neverthrow` (^8.2.0)
-- **Build**: `@rslib/core`, `@hey-api/openapi-ts`
-- **Testing**: `vitest`, `msw`
+- **Required for ai-tools plugin**: `@openai/agents`
