@@ -35,15 +35,12 @@ export const handlers = [
         createdAt: "2023-01-01T00:00:00Z",
       });
     }
-    return HttpResponse.json(
-      { message: "User not found" },
-      { status: 404 },
-    );
+    return HttpResponse.json({ message: "User not found" }, { status: 404 });
   }),
 
   // Mock POST /users endpoint
   http.post("https://api.testservice.com/v1/users", async ({ request }) => {
-    const body = await request.json() as any;
+    const body = (await request.json()) as object;
     return HttpResponse.json({
       id: "550e8400-e29b-41d4-a716-446655440002",
       ...body,
