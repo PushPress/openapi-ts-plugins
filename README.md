@@ -112,19 +112,19 @@ With the AI tools plugin, your OpenAPI operations are transformed into structure
 
 ```typescript
 // Generated from your OpenAPI spec
-import { getUserTool, createUserTool } from "./client/tools";
+import { getUserTool, createUserToolOptions } from "./client/tools";
 
-import { Agent, webSearchTool, fileSearchTool } from "@openai/agents";
+import { Agent, tool } from "@openai/agents";
 
 // Each tool contains:
 // - name: operation ID
 // - description: from OpenAPI operation
 // - parameters: Zod schema for validation
-// - exec: the actual API function
+// - execute: the actual API function
 
 const agent = new Agent({
-  name: "Travel assistant",
-  tools: [tool(getUserTool), tool(createUserTool)],
+  name: "User Agent",
+  tools: [getUserTool, tool({ ...createUserToolOptions })],
 });
 ```
 
