@@ -9,6 +9,7 @@ import {
   getUserPosts,
   createPost,
 } from "./sdk.gen";
+import { tool } from "@openai/agents";
 import {
   zListUsersData,
   zCreateUserData,
@@ -19,86 +20,97 @@ import {
   zCreatePostData,
 } from "./zod.gen";
 
-export const listUsersTool =
-  /**
-   * List users
-   * Retrieve a list of users with optional filtering
-   */
-  {
-    name: "listUsers",
-    description: "Retrieve a list of users with optional filtering",
-    parameters: zListUsersData,
-    exec: listUsers,
-  };
+/**
+ * List users
+ * Retrieve a list of users with optional filtering
+ */
+export const listUsersToolOptions = {
+  name: "listUsers",
+  description: "Retrieve a list of users with optional filtering",
+  parameters: zListUsersData,
+  execute: listUsers,
+};
 
-export const createUserTool =
-  /**
-   * Create user
-   * Create a new user
-   */
-  {
-    name: "createUser",
-    description: "Create a new user",
-    parameters: zCreateUserData,
-    exec: createUser,
-  };
+export const listUsersTool = tool(listUsersToolOptions);
 
-export const deleteUserTool =
-  /**
-   * Delete user
-   * Delete a user by ID
-   */
-  {
-    name: "deleteUser",
-    description: "Delete a user by ID",
-    parameters: zDeleteUserData,
-    exec: deleteUser,
-  };
+/**
+ * Create user
+ * Create a new user
+ */
+export const createUserToolOptions = {
+  name: "createUser",
+  description: "Create a new user",
+  parameters: zCreateUserData,
+  execute: createUser,
+  needsApproval: true,
+};
 
-export const getUserByIdTool =
-  /**
-   * Get user by ID
-   * Retrieve a specific user by their ID
-   */
-  {
-    name: "getUserById",
-    description: "Retrieve a specific user by their ID",
-    parameters: zGetUserByIdData,
-    exec: getUserById,
-  };
+export const createUserTool = tool(createUserToolOptions);
 
-export const updateUserTool =
-  /**
-   * Update user
-   * Update an existing user
-   */
-  {
-    name: "updateUser",
-    description: "Update an existing user",
-    parameters: zUpdateUserData,
-    exec: updateUser,
-  };
+/**
+ * Delete user
+ * Delete a user by ID
+ */
+export const deleteUserToolOptions = {
+  name: "deleteUser",
+  description: "Delete a user by ID",
+  parameters: zDeleteUserData,
+  execute: deleteUser,
+  needsApproval: true,
+};
 
-export const getUserPostsTool =
-  /**
-   * Get user posts
-   * Retrieve all posts for a specific user
-   */
-  {
-    name: "getUserPosts",
-    description: "Retrieve all posts for a specific user",
-    parameters: zGetUserPostsData,
-    exec: getUserPosts,
-  };
+export const deleteUserTool = tool(deleteUserToolOptions);
 
-export const createPostTool =
-  /**
-   * Create post
-   * Create a new post
-   */
-  {
-    name: "createPost",
-    description: "Create a new post",
-    parameters: zCreatePostData,
-    exec: createPost,
-  };
+/**
+ * Get user by ID
+ * Retrieve a specific user by their ID
+ */
+export const getUserByIdToolOptions = {
+  name: "getUserById",
+  description: "Retrieve a specific user by their ID",
+  parameters: zGetUserByIdData,
+  execute: getUserById,
+};
+
+export const getUserByIdTool = tool(getUserByIdToolOptions);
+
+/**
+ * Update user
+ * Update an existing user
+ */
+export const updateUserToolOptions = {
+  name: "updateUser",
+  description: "Update an existing user",
+  parameters: zUpdateUserData,
+  execute: updateUser,
+  needsApproval: true,
+};
+
+export const updateUserTool = tool(updateUserToolOptions);
+
+/**
+ * Get user posts
+ * Retrieve all posts for a specific user
+ */
+export const getUserPostsToolOptions = {
+  name: "getUserPosts",
+  description: "Retrieve all posts for a specific user",
+  parameters: zGetUserPostsData,
+  execute: getUserPosts,
+};
+
+export const getUserPostsTool = tool(getUserPostsToolOptions);
+
+/**
+ * Create post
+ * Create a new post
+ */
+export const createPostToolOptions = {
+  name: "createPost",
+  description: "Create a new post",
+  parameters: zCreatePostData,
+  execute: createPost,
+  needsApproval: true,
+};
+
+export const createPostTool = tool(createPostToolOptions);
