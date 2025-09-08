@@ -7,7 +7,7 @@ export const defaultConfig: MyPlugin["Config"] = {
   config: {
     exportFromIndex: true,
   },
-  dependencies: ["@hey-api/typescript", "zod"],
+  dependencies: ["@hey-api/typescript"],
   handler,
   name: "ai-tools",
   output: "tools",

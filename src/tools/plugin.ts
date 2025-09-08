@@ -17,8 +17,6 @@ export const createTool = ({
   plugin: MyPlugin["Instance"];
 }) => {
   const file = plugin.context.file({ id: plugin.name })!;
-  const pluginZod = plugin.getPlugin("zod")!;
-  const zodFile = plugin.context.file({ id: "zod" });
 
   file.import({
     module: file.relativePathToFile({
@@ -31,20 +29,6 @@ export const createTool = ({
   const toolName = `${operation.id}Tool`;
   const toolOptionsName = `${toolName}Options`;
 
-  const requestSchemaName = zodFile?.getName(
-    pluginZod.api.getId({ operation, type: "data" }),
-  );
-
-  file.import({
-    module: "@openai/agents",
-    name: "tool",
-  });
-
-  file.import({
-    module: file.relativePathToFile({ context: plugin.context, id: "zod" }),
-    name: requestSchemaName,
-  });
-
   const isMutation =
     operation.method &&
     ["POST", "PUT", "PATCH", "DELETE"].includes(operation.method.toUpperCase());
@@ -56,11 +40,7 @@ export const createTool = ({
     },
     {
       key: "description",
-      value: operation.description,
-    },
-    {
-      key: "parameters",
-      value: requestSchemaName,
+      value: operation.description ?? operation.summary ?? "",
     },
     {
       key: "execute",
@@ -78,7 +58,7 @@ export const createTool = ({
 
   const toolOptionsExpression = tsc.objectExpression({
     obj: toolOptionsObj,
-    identifiers: ["parameters", "execute"],
+    identifiers: ["execute"],
   });
 
   const optionsStatement = tsc.constVariable({
@@ -88,16 +68,7 @@ export const createTool = ({
     comment: [operation.summary, operation.description],
   });
 
-  const toolStatement = tsc.constVariable({
-    exportConst: true,
-    expression: tsc.callExpression({
-      functionName: "tool",
-      parameters: [tsc.identifier({ text: toolOptionsName })],
-    }),
-    name: toolName,
-  });
-
-  file.add(optionsStatement, toolStatement);
+  file.add(optionsStatement);
 };
 
 export const handler: MyPlugin["Handler"] = ({ plugin }) => {

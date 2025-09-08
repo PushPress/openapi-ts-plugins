@@ -9,16 +9,6 @@ import {
   getUserPosts,
   createPost,
 } from "./sdk.gen";
-import { tool } from "@openai/agents";
-import {
-  zListUsersData,
-  zCreateUserData,
-  zDeleteUserData,
-  zGetUserByIdData,
-  zUpdateUserData,
-  zGetUserPostsData,
-  zCreatePostData,
-} from "./zod.gen";
 
 /**
  * List users
@@ -27,11 +17,8 @@ import {
 export const listUsersToolOptions = {
   name: "listUsers",
   description: "Retrieve a list of users with optional filtering",
-  parameters: zListUsersData,
   execute: listUsers,
 };
-
-export const listUsersTool = tool(listUsersToolOptions);
 
 /**
  * Create user
@@ -40,12 +27,9 @@ export const listUsersTool = tool(listUsersToolOptions);
 export const createUserToolOptions = {
   name: "createUser",
   description: "Create a new user",
-  parameters: zCreateUserData,
   execute: createUser,
   needsApproval: true,
 };
-
-export const createUserTool = tool(createUserToolOptions);
 
 /**
  * Delete user
@@ -54,12 +38,9 @@ export const createUserTool = tool(createUserToolOptions);
 export const deleteUserToolOptions = {
   name: "deleteUser",
   description: "Delete a user by ID",
-  parameters: zDeleteUserData,
   execute: deleteUser,
   needsApproval: true,
 };
-
-export const deleteUserTool = tool(deleteUserToolOptions);
 
 /**
  * Get user by ID
@@ -68,11 +49,8 @@ export const deleteUserTool = tool(deleteUserToolOptions);
 export const getUserByIdToolOptions = {
   name: "getUserById",
   description: "Retrieve a specific user by their ID",
-  parameters: zGetUserByIdData,
   execute: getUserById,
 };
-
-export const getUserByIdTool = tool(getUserByIdToolOptions);
 
 /**
  * Update user
@@ -81,12 +59,9 @@ export const getUserByIdTool = tool(getUserByIdToolOptions);
 export const updateUserToolOptions = {
   name: "updateUser",
   description: "Update an existing user",
-  parameters: zUpdateUserData,
   execute: updateUser,
   needsApproval: true,
 };
-
-export const updateUserTool = tool(updateUserToolOptions);
 
 /**
  * Get user posts
@@ -95,11 +70,8 @@ export const updateUserTool = tool(updateUserToolOptions);
 export const getUserPostsToolOptions = {
   name: "getUserPosts",
   description: "Retrieve all posts for a specific user",
-  parameters: zGetUserPostsData,
   execute: getUserPosts,
 };
-
-export const getUserPostsTool = tool(getUserPostsToolOptions);
 
 /**
  * Create post
@@ -108,9 +80,6 @@ export const getUserPostsTool = tool(getUserPostsToolOptions);
 export const createPostToolOptions = {
   name: "createPost",
   description: "Create a new post",
-  parameters: zCreatePostData,
   execute: createPost,
   needsApproval: true,
 };
-
-export const createPostTool = tool(createPostToolOptions);
