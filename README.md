@@ -114,6 +114,7 @@ With the AI tools plugin, your OpenAPI operations are transformed into structure
 // Generated from your OpenAPI spec
 import { getUserTool, createUserToolOptions } from "./client/tools";
 
+import { z } from "zod";
 import { Agent, tool } from "@openai/agents";
 
 // Each tool contains:
@@ -124,7 +125,13 @@ import { Agent, tool } from "@openai/agents";
 
 const agent = new Agent({
   name: "User Agent",
-  tools: [getUserTool, tool({ ...createUserToolOptions })],
+  tools: [
+    tool({
+      ...createUserToolOptions,
+      // define your tool options here
+      parameters: z.unknown(),
+    }),
+  ],
 });
 ```
 

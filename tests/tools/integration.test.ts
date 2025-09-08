@@ -12,14 +12,12 @@ describe("Tools Plugin Tests", () => {
       expect(listUsersToolOptions).toEqual({
         name: "listUsers",
         description: "Retrieve a list of users with optional filtering",
-        parameters: expect.any(Object), // zod schema
         execute: expect.any(Function),
       });
 
       expect(getUserByIdToolOptions).toEqual({
         name: "getUserById",
         description: "Retrieve a specific user by their ID",
-        parameters: expect.any(Object), // zod schema
         execute: expect.any(Function),
       });
     });
@@ -28,7 +26,6 @@ describe("Tools Plugin Tests", () => {
       expect(createUserToolOptions).toEqual({
         name: "createUser",
         description: "Create a new user",
-        parameters: expect.any(Object), // zod schema
         execute: expect.any(Function),
         needsApproval: true,
       });
@@ -36,7 +33,6 @@ describe("Tools Plugin Tests", () => {
       expect(deleteUserToolOptions).toEqual({
         name: "deleteUser",
         description: "Delete a user by ID",
-        parameters: expect.any(Object), // zod schema
         execute: expect.any(Function),
         needsApproval: true,
       });
@@ -100,4 +96,3 @@ describe("Tools Plugin Tests", () => {
     });
   });
 });
-
