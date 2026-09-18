@@ -1,3 +1,7 @@
+> [!WARNING]
+> This repo has been moved into [PushPress-Services](https://github.com/PushPress/PushPress-Services) as of Sep 18, 2026. It is no longer maintained.
+
+
 # @pushpress/openapi-ts-plugins
 
 A collection of plugins for [@hey-api/openapi-ts](https://heyapi.vercel.app/) that enhance generated TypeScript clients with additional functionality and type safety.
